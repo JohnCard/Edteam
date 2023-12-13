@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href="{% static 'List14.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>Edteam courses</title>
+</head>
+<body>
+    <header>
+        {% block header %}
+            <a href='/Form/'>Create a new Course</a>
+            <form method='GET' action='/Courses/'>
+                <label>
+                    🔎 <input type='text' name='q'>
+                </label>
+            </form>
+        {% endblock header %}
+    </header>
+    <br><br><br><br><br><br><br><br><br><br><br><br>
+    <main>
+        <ol>
+            {% block main %}
+            {% for course in Courses %}
+                <a href='/Detail/{{course.id}}'>
+                <li>  
+                <img src='{{course.img}}' alt='{{course.title}}' height='170'>   
+                <h2>{{course.title}}</h2>
+                <p>Calificación de la audiencia: {{course.qualification}}</p>
+                <p>Estrenado el {{course.date}}</p>
+                <p>Este curso fue dictado por {{course.teacher}}</p>
+                <p>Opinión mas frecuente: {{course.description}}</p>
+                <p class='price'>Valorado en ${{course.price}}</p>
+                </li>
+                </a>
+            {% endfor %}
+            {% endblock main %} 
+        </ol>
+    </main>
+    <footer>
+        <a href="">Visit our Redes</a>
+    </footer>
+</body>
+</html>

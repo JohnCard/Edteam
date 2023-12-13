@@ -1,0 +1,22 @@
+{% extends "../Form.html" %}
+{% load static %}
+{% block style %}
+<link rel='stylesheet' href="{% static stylesheet %}">
+{% endblock style %}
+{% block main %}
+<main>
+    <form method="POST" action='.'>
+        {% csrf_token %}
+        {{ form.as_p}}
+        <input type='submit' value='Create'>
+        {% if link %}
+            <a href='{{link}}'>Cancelll !!!</a>
+        {% endif %}
+        {% if delete_url %}
+            <a href='{{delete_url}}'>Delete this item</a> 
+        {% endif %}
+    </form>
+</main>
+{% endblock main %}
+{% block footer %}
+{% endblock footer %}

@@ -1,0 +1,24 @@
+{% extends "Detail.html" %}
+{% load static %}
+{% block style %}
+    <link rel='stylesheet' href="{% static 'Del2.css' %}">
+{% endblock style %}
+{% block title %}
+    <title>Deleting the {{course.title}} course</title>
+{% endblock title %}
+{% block main %}
+    <main>
+    <form method='POST' action=''>
+        <h1>Delete - {{course.title}}</h1>
+        {% csrf_token %}
+        <h2>¿Are you sure to delete the {{course.title}} course???</h2>
+        <input type='submit' value='Delete course'>
+    </form>
+    </main>
+{% endblock main %}
+{% block footer %}
+<footer>
+        <a href='/Courses/'>🏟️ Back to Courses view</a><br><br>
+        <a href='/Detail/{{course.id}}'>Cancelll !!!</a>
+</footer>
+{% endblock footer %}

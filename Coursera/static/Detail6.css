@@ -1,0 +1,55 @@
+*,*:before,*:after{
+    box-sizing: border-box;
+}
+body,html{
+    height: 100%;
+    font-family: 'Press Start 2P', sans-serif;
+    background-color: rgb(27, 66, 66);
+    color: rgb(158, 200, 185);
+}
+[href='/Form/']{
+    text-decoration: none;
+    color: whitesmoke;
+    font-weight: bold;
+    background-color: rgb(100, 204, 197);
+    border-radius: 5px;
+    padding: 20px 30px;
+    transition: background-color .5s ease-in-out;
+}
+
+[href='/Form/']:hover{
+    background-color: rgb(4, 54, 74);
+    width: 200px;
+}
+header{
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 2% 6% 2% 100%;
+    background-color: rgb(23, 107, 135);
+    display: flex;
+    flex-direction: row;
+    gap: 100px;
+}
+a{
+    text-decoration: none;
+}
+div{
+    margin: 0 5% 10% 20%;
+    display: inline-block;
+    width: 30%;
+}
+img{
+    border-radius: 20px;
+}
+footer{
+    display: flex;
+    gap: 10%;
+    width: 100%;
+    height: 20%;
+    position: absolute;
+    padding: 5%;
+    bottom: 0;
+    background-color: rgb(23, 107, 135);
+    font-size: 130%;
+}

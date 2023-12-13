@@ -1,0 +1,23 @@
+{% extends "../List.html" %}
+{% load static %}
+{% block header %}
+    {% if title %}
+        <h1>{{ title }}</h1>
+    {% endif %} 
+    <a href='/createCourse/'>Create a new Course</a>
+{% endblock header %}
+{% block main %}
+{% for course in object_list %}
+    <a href='/detailCourse/{{course.id}}'>
+    <li>
+    <img src='{{course.img}}' alt='{{course.title}}' height='170'>   
+    <h2>{{course.title}}</h2>
+    <p>Calificación de la audiencia: {{course.qualification}}</p>
+    <p>Estrenado el {{course.date}}</p>
+    <p>Este curso fue dictado por {{course.teacher}}</p>
+    <p>Opinión mas frecuente: {{course.description}}</p>
+    <p class='price'>Valorado en ${{course.price}}</p>
+    </li>
+    </a>
+{% endfor %}
+{% endblock main %}

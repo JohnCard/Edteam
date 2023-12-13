@@ -1,0 +1,43 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block style %}
+        <link rel='stylesheet' href="{% static 'Detail6.css' %}">
+    {% endblock style %}
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    {% block title %}
+        <title>{{course.title}}</title>
+    {% endblock title %}
+</head>
+<body>
+    {% block header %}
+        <header>
+            <a href='/Form/'>Create a new Course</a>
+        </header>
+    {% endblock header %}
+    {% block main %}
+        <br><br><br><br><br><br><br><br><br><br><br><br>
+        <main>
+            <div>
+            <h1>{{course.title}}</h1>
+            <h3>Valorado en ${{course.price}}</h3>
+            <h3>Posted in {{course.date}}</h3>
+            <h3>Rated {{course.qualification}}/10</h3>
+            <h3>Dicted by {{course.teacher}}</h3>
+            <p>{{course.description}}</p>
+            </div>
+            <img src='{{course.img}}' alt='{{course.title}}' width='500'>
+        </main>
+    {% endblock main %}
+    {% block footer %}
+        <footer>
+            <a href='/Update/{{course.id}}'>Update this course!!!</a>
+            <a href='/Delete/{{course.id}}'>Wanna delete this course???</a>
+            <a href='/Courses/'>🏟️ Courses</a>
+        </footer>
+    {% endblock footer %}
+</body>
+</html>

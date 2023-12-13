@@ -1,0 +1,21 @@
+{% extends "../Delete.html" %}
+{% load static %}
+{% block title %}
+<title>Deleting the {{object.title}} course</title>
+{% endblock title %}
+{% block main %}
+    <main>
+    <form method='POST' action=''>
+        <h1>Delete - {{object.title}}</h1>
+        {% csrf_token %}
+        <h2>¿Are you sure to delete the {{object.title}} course???</h2>
+        <input type='submit' value='Delete object'>
+    </form>
+    </main>
+{% endblock main %}
+{% block footer %}
+<footer>
+<a href='/allCourses/'>🏟️ Back to Courses view</a><br><br>
+<a href='/detailCourse/{{object.id}}'>Cancelll !!!</a>
+</footer>
+{% endblock footer %}

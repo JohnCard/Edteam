@@ -1,0 +1,62 @@
+{% extends "../Form.html" %}
+{% load static %}
+{% block style %}
+{% if form %}
+{% include './link.html' with link='Update9.css' %}
+{% else %}
+{% include './link.html' with link='Detail6.css' %}
+{% endif %}
+{% endblock style %}
+{% block title %}
+{% if form %}
+<title>Updating {{object.title}}</title>
+{% else %}
+<title>{{object.title}}</title>
+{% endif %}
+{% endblock title %}
+{% block header %}
+<header>
+    <a href='/Form/'>Create a new Course</a>
+</header>
+{% endblock header %}
+{% block main %}
+{% if form %}
+<br><br><br><br><br><br><br><br><br><br><br><br>
+<main>
+<h1>Upgrade the item: {{course.title}} course</h1>
+<form method="POST" action='.'>
+    {% csrf_token %}
+    {{ form.as_p}}
+    <a href='/detailCourse/{{object.id}}'>Cancelll !!!</a>
+    <a href='{{object.get_delete_url}}'>Wanna delete the {{object.title}} course???</a> 
+    <input type='submit' value='Update'>
+</form>
+</main>
+{% else %}
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<main>
+<div>
+    <h1>{{object.title}}</h1>
+    <h3>Valorado en ${{object.price}}</h3>
+    <h3>Posted in {{object.date}}</h3>
+    <h3>Rated {{object.qualification}}/10</h3>
+    <h3>Dicted by {{object.teacher}}</h3>
+    <p>{{object.description}}</p>
+    </div>
+    <img src='{{object.img}}' alt='{{object.title}}' width='500'>
+</main>
+{% endif %}
+{% endblock main %}
+{% block footer %}
+{% if form %}
+<footer>
+    <a href='/allCourses/'>Wanna back to all 🏟️ Courses list???</a>
+</footer>
+{% else %}
+<footer>
+    <a href='/updateCourse/{{object.id}}/'>Update this course!!!</a>
+    <a href='/updateCourse/{{object.id}}/delete/'>Wanna delete this course???</a>
+    <a href='/allCourses/'>Wanna back to all 🏟️ Courses list???</a>
+</footer>
+{% endif %}
+{% endblock footer %}
