@@ -8,7 +8,8 @@ from .mixins import TitleMixin, linkMixin,styleMix
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import json
-
+from rest_framework import viewsets
+from .serializers import CourseSerializer
 # Create your views here.
 
 class CourseAPIView(APIView):
@@ -17,9 +18,14 @@ class CourseAPIView(APIView):
         return Response({'Course':Course.objects.filter(id=id).values()})
     
     def post(self,request):
-        jd = json.loads(request.body)
-        Course.objects.create(title=jd['title'],qualification=jd['qualification'],img=jd['img'],modules=jd['modules'],teacher=['teacher'],description=jd['description'],price=['price'])
-        return Response({'Message':'Succes'})
+        # jd = json.loads(request.body)
+        # Course.objects.create(title=jd['title'],qualification=jd['qualification'],modules=jd['modules'],teacher=['teacher'],description=jd['description'],price=['price'])
+        # return Response({'Message':'Succes'})
+        serializer = CourseSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors)
     
     def put(self,request,id):
         jd = json.loads(request.body)
@@ -49,6 +55,57 @@ class CourseAPIView(APIView):
             'Youre calling a pacth method'
         }
         return Response(content)
+    
+class CourseApis(viewsets.ModelViewSet):
+    serializer_class = CourseSerializer
+    
+    def get_queryset(self):
+        courses = Course.objects.all()
+        return courses
+    
+    def list(self, request, *args, **kwargs):
+        projs_serializer = CourseSerializer(self.get_queryset(),many=True)
+        return Response(projs_serializer.data)
+            
+    def retrieve(self, request, *args, **kwargs):
+        try: 
+            projects = Course.objects.filter(id=kwargs['pk'])
+            serializer = CourseSerializer(projects,many=True)
+            return Response(serializer.data)
+        except:
+            return Response({'Message': 'We couldn´t ubicate this item'})
+    
+    def create(self, request, *args, **kwargs):
+        course_data = request.data
+        new_course = Course.objects.create(title=course_data['title'],qualification=course_data['qualification'],img=course_data['img'],modules=course_data['modules'],teacher=course_data['teacher'],description=course_data['description'],price=course_data['price'])
+        new_course.save()
+        serializer = CourseSerializer(new_course)
+        return Response(serializer.data)
+    
+    def destroy(self, request, *args, **kwargs):
+        try:
+            comment_id = self.kwargs["pk"]
+            comment = get_object_or_404(Course, id=comment_id)
+            comment.delete()
+            return Response({'Message': 'Object deleted successfully'})
+        except:
+            return Response({'Message':'we couldn´t get the item indicated'})
+    
+    def update(self, request, *args, **kwargs):
+        course = get_object_or_404(Course, id=self.kwargs["pk"])
+        course_serializer = CourseSerializer(course, data=request.data)
+        if course_serializer.is_valid():
+            course_serializer.save()
+            return Response(course_serializer.data)
+        return Response({'Message': 'Failed request'})
+    
+    def partial_update(self, request, *args, **kwargs):
+        course = get_object_or_404(Course, id=self.kwargs["pk"])
+        serializer = CourseSerializer(course, data=request.data, partial=True)
+        if serializer.is_valid():
+            return Response(request.data)
+        return Response("wrong parameters")
+    
 
 def list(request):
     query = request.GET.get('q',None)

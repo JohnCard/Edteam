@@ -38,7 +38,7 @@ class Course(models.Model):
             MinValueValidator(1),
             MaxValueValidator(12)
         ])
-    teacher = models.CharField(max_length=30,choices=OPTIONS)
+    teacher = models.CharField(max_length=30,choices=OPTIONS,default='Álvaro Felipe')
     description = models.TextField(default='A good course to learning this technology')
     price = models.PositiveSmallIntegerField(default=400)
     
