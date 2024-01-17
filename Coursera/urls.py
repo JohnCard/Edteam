@@ -1,12 +1,12 @@
 from django.urls import path,include
 from rest_framework import routers
-from .views import list,detail,form,update,delete,coursesView,createView,detailView,updateView,deleteCourse,CourseAPIView,CourseApis
+from .views import list,detail,form,update,delete,coursesView,createView,detailView,updateView,deleteCourse,CourseApi,CourseApis
 
 router = routers.DefaultRouter()
 router.register('api/courses', CourseApis,'Courses')
 urlpatterns = [
     path('',include(router.urls)),
-    path('courseApi/<int:id>',CourseAPIView.as_view()),
+    path('courseApi/<int:id>',CourseApi.as_view(),name='course-api'),
     path('Courses/',list),
     path('Detail/<int:id_course>',detail),
     path('Form/',form),

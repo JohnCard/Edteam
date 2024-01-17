@@ -24,12 +24,14 @@ OPTIONS = [
 ] 
         
 class Course(models.Model):
+    id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=50)
     qualification = models.PositiveSmallIntegerField(
         validators=[
             MinValueValidator(0),
             MaxValueValidator(10)
-        ]
+        ],
+        default=7
     )
     img = models.ImageField(default='https://assets-global.website-files.com/6410ebf8e483b5bb2c86eb27/6410ebf8e483b53d6186fc53_ABM%20College%20Web%20developer%20main.jpg')
     date = models.DateField(auto_now_add=True)

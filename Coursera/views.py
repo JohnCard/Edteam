@@ -12,50 +12,50 @@ from rest_framework import viewsets
 from .serializers import CourseSerializer
 # Create your views here.
 
-class CourseAPIView(APIView):
-    
+class CourseApi(APIView):
+    serializer_class=CourseSerializer
     def get(self,request,id):
-        return Response({'Course':Course.objects.filter(id=id).values()})
-    
-    def post(self,request):
-        # jd = json.loads(request.body)
-        # Course.objects.create(title=jd['title'],qualification=jd['qualification'],modules=jd['modules'],teacher=['teacher'],description=jd['description'],price=['price'])
-        # return Response({'Message':'Succes'})
-        serializer = CourseSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data)
-        return Response(serializer.errors)
-    
-    def put(self,request,id):
-        jd = json.loads(request.body)
-        project = list(Course.objects.filter(id=id).values())
-        if len(project)>0:
-            project = Course.objects.get(id=id)
-            project.title = jd['title']
-            project.description = jd['description']
-            project.technology = jd['technology']
-            project.save()
-            data = {'Message':'Succes'}
-        else:
-            data = {'Message':'Failed'}
-        return Response(data)
-    
-    def delete(self,request,id):
-        project = list(Course.objects.filter(id=id).values())
-        if len(project)>0:
-            Course.objects.filter(id=id).delete()
-            data = {'Message':'Succes'}
-        else:
-            data = {'Message':'Failed'}
-        return Response(data)
-    
+        try:
+            return Response({'All our courses':Course.objects.filter(id=id).values()})
+        except:
+            projects = Course.objects.all().values()
+            return Response({'Message':'List of projects','List':projects})
+
+    def post(self, request):
+        print('request: ',request.data)
+        # serializer=CourseSerializer(data=request.data)
+        # if(serializer.is_valid()):
+        #     Course.objects.create(
+        #     id=serializer.data.get('id'),
+        #     title=serializer.data.get('title'),
+        #     qualification=serializer.data.get('qualification'),
+        #     img=serializer.data.get('img'),
+        #     modules=serializer.data.get('modules'),
+        #     teacher=serializer.data.get('teacher'),
+        #     description=serializer.data.get('description'),
+        #     price=serializer.data.get('price')
+        #     )
+        # course=Course.objects.all().filter(title=request.data['id']).values()
+        # # return Response({'Message':'New Course added','Course':course})
+        # return HttpResponseRedirect(f'/courseApi/{request.data["id"]}')
+        
+    def put(self, request):
+        content={
+            'Youre calling a put method'
+        }
+        return Response(content)
+
     def patch(self, request):
         content={
             'Youre calling a pacth method'
         }
         return Response(content)
-    
+
+    def delete(self, request):
+        content ={
+            'Youre calling a delete method'
+        }
+        return Response(content)
 class CourseApis(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     
@@ -104,8 +104,7 @@ class CourseApis(viewsets.ModelViewSet):
         serializer = CourseSerializer(course, data=request.data, partial=True)
         if serializer.is_valid():
             return Response(request.data)
-        return Response("wrong parameters")
-    
+        return Response("wrong parameters")   
 
 def list(request):
     query = request.GET.get('q',None)
