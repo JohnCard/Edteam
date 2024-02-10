@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='stylesheet' href="{% static 'main5.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <title>YouTube</title>
+    <link rel="icon" href='TubeIcon.ico'>
+</head>
+<body>
+    <div class="contenedor active" id="contenedor">
+		<header class="header">
+			<div class="contenedor-logo">
+				<button id="boton-menu" class="boton-menu"><i class="fas fa-bars"></i></button>
+				<a href="#" class="logo"><i class="fas fa-play"></i></a>
+			</div>
+
+			<div class="barra-busqueda">
+				<form method='GET' action='/Videos/'>
+				<input type="text" placeholder="Buscar" name='q'>
+				<button type="submit"><i class="fas fa-search"></i></button>
+				</form>
+			</div>
+
+			<div class="botones-header">
+				<button><i class="fas fa-upload"></i></button>
+				<button><i class="fas fa-th"></i></button>
+				<button><i class="fas fa-bell"></i></button>
+			</div>
+		</header>
+
+		<nav class="menu-lateral">
+			<a href="#" class="active"><i class="fas fa-home"></i>Main page</a>
+			<a href="#"><i class="fas fa-fire"></i> Thendings</a>
+			<a href="#"><i class="fas fa-star"></i> Suscripes</a>
+
+			<hr>
+
+			<a href="#"><i class="fas fa-folder"></i> Python and django</a>
+			<a href="#"><i class="fas fa-folder"></i> Python and raspberry</a>
+			<a href="#"><i class="fas fa-folder"></i> Python and Flask</a>
+
+			<hr>
+
+			<a href="#"><i class="fas fa-folder"></i> Arduino</a>
+			<a href="#"><i class="fas fa-folder"></i> MineCraft</a>
+			<a href="#"><i class="fas fa-folder"></i> Let´s go</a>
+		</nav>
+
+		<main class="main">
+			<h3 class="titulo">Videos Recomendados</h3>
+			<ol class="grid-videos">
+                {% for tube in Videos %}
+                <li>
+				<a href='/video/{{tube.id}}' class="video">
+					<img src="{{tube.img}}" alt="tube.title"><br><br>
+                    <p>{{tube.title}}<br><br>
+                    {{tube.youtuber}}<br><br>
+                    {{tube.views}} views | {{tube.date}}</p>
+                </a>
+                </li>
+                {% endfor %}
+            </ol>
+		</main>
+	</div>
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js" crossorigin="anonymous"></script>
+</body>
+</html>

@@ -1,0 +1,46 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% block style %}
+        <link rel='stylesheet' href="{% static 'estilos6.css' %}">
+    {% endblock style %}
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    {% block title %}
+        <title>{{video.title}}</title>
+    {% endblock title %}
+</head>
+<body>
+    {% block header %}
+        <header>
+            <h1 class="titulo">{{video.title}}</h1>
+        </header>
+    {% endblock header %}
+    {% block main %}
+        <main>
+            <div class="contenedor">
+                <video class="fm-video video-js vjs-16-9 vjs-big-play-centered" data-setup="{}" controls id="fm-video">
+                    <source src="video/keyboard.mp4" type="video/mp4">
+                </video>
+                </br></br></br></br>
+                <article>
+                    <div>
+                    {{video.title}}</br></br>
+                    Date: {{video.date}}</br></br>
+                    Views: {{video.views}}</br></br>
+                    Time to check: {{video.during}}</br></br>
+                    Published by {{video.youtuber}}</br></br>
+                    Description: {{video.description}}</br></br>
+                    Thanks for Watching, Good Bye!!!</br></br>
+                    <a href='/Videos/'>Back to tubes list!!!</a>
+                    </div>
+                    <img src="{{video.img}}" alt="tube.title" height='300'><br><br>
+                </article>
+                
+            </div>
+        </main>
+    {% endblock main %}
+</body>
+</html>
