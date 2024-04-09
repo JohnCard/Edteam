@@ -5,3 +5,4 @@ from .models import Video, Youtuber, Anime
 admin.site.register(Video)
 admin.site.register(Anime)
 admin.site.register(Youtuber)
+

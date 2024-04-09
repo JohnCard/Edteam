@@ -1,0 +1,45 @@
+*,*:before,*:after{
+    box-sizing: border-box;
+}
+body,html{
+    height: 100%;
+    font-family: 'Press Start 2P', sans-serif;
+    background-color: rgb(158, 200, 185);
+    color: rgb(9, 38, 53);
+    margin: 3% 25%;
+}
+a{
+    text-decoration: none;
+    margin: 2% 25%;
+}
+h3{
+    text-align: center;
+}
+form{
+    display: flex;
+    flex-direction: row;
+    flex-flow: wrap;
+    gap: 2%;
+}
+main{
+    background-color: rgb(92, 131, 116);
+    padding: 5% 5%;
+    height: 90%;
+    width: 100%;
+    border-radius: 10px;
+    margin: 2% 0;
+}
+input,textarea,select{
+    margin: 2% 0;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: rgb(27, 66, 66);
+    font-family: 'Press Start 2P', sans-serif;
+    width: 75%;
+}
+textarea{
+    height: 40%;
+}
+[name=qualification]{
+    width: 40%;
+}
