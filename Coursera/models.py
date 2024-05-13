@@ -24,7 +24,7 @@ OPTIONS = [
 ] 
         
 class Course(models.Model):
-    id = models.IntegerField(primary_key=True)
+    # id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=50)
     qualification = models.PositiveSmallIntegerField(
         validators=[
@@ -43,6 +43,7 @@ class Course(models.Model):
     teacher = models.CharField(max_length=30,choices=OPTIONS,default='Álvaro Felipe')
     description = models.TextField(default='A good course to learning this technology')
     price = models.PositiveSmallIntegerField(default=400)
+    # created = models.DateTimeField(auto_now_add=True)
     
     def get_absolute_url(self):
         return f'/detailCourse/{self.id}'
@@ -52,3 +53,4 @@ class Course(models.Model):
     
     def get_delete_url(self):
         return f'/updateCourse/{self.id}/delete'
+    

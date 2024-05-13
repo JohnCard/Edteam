@@ -1,28 +1,36 @@
 from django.shortcuts import render, get_object_or_404
 from .forms import CourseForm,formCourse
 from django.http import HttpResponseRedirect
-from .models import Course 
+from .models import Course,Teacher
 from django.db.models import Q
 from django.views.generic import ListView,CreateView,DetailView, UpdateView, DeleteView
 from .mixins import TitleMixin, linkMixin,styleMix
 from rest_framework.views import APIView
 from rest_framework.response import Response
 import json
-from rest_framework import viewsets
-from .serializers import CourseSerializer
+from rest_framework import viewsets,status,generics
+from rest_framework.viewsets import ViewSet
+from .serializers import CourseSerializer,Alumn,TeacherSerializer
+from .pagination import CoursePagination,CourseCPagination,TeacherPagination
 # Create your views here.
+
+class PaginationView(generics.ListAPIView):
+    queryset = Teacher.objects.all()
+    serializer_class = TeacherSerializer
+    pagination_class = TeacherPagination
 
 class CourseApi(APIView):
     serializer_class=CourseSerializer
-    def get(self,request,id):
-        try:
-            return Response({'All our courses':Course.objects.filter(id=id).values()})
-        except:
-            projects = Course.objects.all().values()
-            return Response({'Message':'List of projects','List':projects})
+    def get(self,request):
+        # try:
+        #     return Response({'All our courses':Course.objects.filter(id=id).values()})
+        # except:
+        #     projects = Course.objects.all().values()
+        #     return Response({'Message':'List of projects','List':projects})
+        return Response({'Get method'})
 
     def post(self, request):
-        print('request: ',request.data)
+        return Response({request})
         # serializer=CourseSerializer(data=request.data)
         # if(serializer.is_valid()):
         #     Course.objects.create(
@@ -56,6 +64,38 @@ class CourseApi(APIView):
             'Youre calling a delete method'
         }
         return Response(content)
+
+class NewApi(APIView):
+    serializer_class=Alumn
+    def get(self,request,format=None):
+        return Response({'Get method'})
+
+    def post(self, request):
+        serializer = self.serializer_class(data=request.data)
+        if serializer.is_valid():
+            name = serializer.validated_data.get("name")
+            return Response({"Message": f"Hola {name}"})
+        else:
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+        
+    def put(self, request,pk=None):
+        content={
+            "Method":"Put"
+        }
+        return Response(content)
+
+    def patch(self, request,pk=None):
+        content={
+            "Method":"Patch"
+        }
+        return Response(content)
+
+    def delete(self, request,pk=None):
+        content ={
+            "Method":"Delete"
+        }
+        return Response(content)    
+
 class CourseApis(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     
