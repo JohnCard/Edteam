@@ -34,7 +34,7 @@ class Course(models.Model):
         default=7
     )
     img = models.ImageField(default='https://assets-global.website-files.com/6410ebf8e483b5bb2c86eb27/6410ebf8e483b53d6186fc53_ABM%20College%20Web%20developer%20main.jpg')
-    date = models.DateField(auto_now_add=True)
+    # date = models.DateField(auto_now_add=True)
     modules = models.PositiveSmallIntegerField(default=5,
                                                validators=[
             MinValueValidator(1),
@@ -43,7 +43,7 @@ class Course(models.Model):
     teacher = models.CharField(max_length=30,choices=OPTIONS,default='Álvaro Felipe')
     description = models.TextField(default='A good course to learning this technology')
     price = models.PositiveSmallIntegerField(default=400)
-    # created = models.DateTimeField(auto_now_add=True)
+    created = models.DateTimeField(auto_now_add=True)
     
     def get_absolute_url(self):
         return f'/detailCourse/{self.id}'
@@ -53,4 +53,22 @@ class Course(models.Model):
     
     def get_delete_url(self):
         return f'/updateCourse/{self.id}/delete'
+    
+class Vehicle(models.Model):
+    owner = models.CharField(max_length=35)
+    plaque = models.CharField(max_length=20)
+    vin = models.CharField(max_length=20)
+    brand = models.CharField(max_length=20)
+    sub_brand = models.CharField(max_length=20)
+    verify_reason = models.CharField(max_length=30)
+    service = models.CharField(max_length=15)
+    line = models.IntegerField()
+    no_tech = models.IntegerField()
+    folio = models.IntegerField()
+    created = models.DateTimeField(auto_now_add=True)
+    
+class Alumn(models.Model):
+    name = models.CharField(max_length=10)
+    url = models.CharField(max_length=40)
+    created = models.DateTimeField(auto_now_add=True)
     

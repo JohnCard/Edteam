@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .forms import CourseForm,formCourse
 from django.http import HttpResponseRedirect
-from .models import Course,Teacher
+from .models import Course,Vehicle
 from django.db.models import Q
 from django.views.generic import ListView,CreateView,DetailView, UpdateView, DeleteView
 from .mixins import TitleMixin, linkMixin,styleMix
@@ -9,65 +9,45 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 import json
 from rest_framework import viewsets,status,generics
-from rest_framework.viewsets import ViewSet
-from .serializers import CourseSerializer,Alumn,TeacherSerializer
-from .pagination import CoursePagination,CourseCPagination,TeacherPagination
+from rest_framework.permissions import IsAuthenticated
+from .serializers import CourseSerializer,Alumn, vehicleSerializer, Url
+from .pagination import CoursePagination,CourseCPagination
+# import requests
+# from bs4 import BeautifulSoup
+from .tests import get_data
 # Create your views here.
 
-class PaginationView(generics.ListAPIView):
-    queryset = Teacher.objects.all()
-    serializer_class = TeacherSerializer
-    pagination_class = TeacherPagination
-
-class CourseApi(APIView):
-    serializer_class=CourseSerializer
-    def get(self,request):
-        # try:
-        #     return Response({'All our courses':Course.objects.filter(id=id).values()})
-        # except:
-        #     projects = Course.objects.all().values()
-        #     return Response({'Message':'List of projects','List':projects})
-        return Response({'Get method'})
+class Methods(APIView):
+    permission_classes = (IsAuthenticated, )
 
     def post(self, request):
-        return Response({request})
-        # serializer=CourseSerializer(data=request.data)
-        # if(serializer.is_valid()):
-        #     Course.objects.create(
-        #     id=serializer.data.get('id'),
-        #     title=serializer.data.get('title'),
-        #     qualification=serializer.data.get('qualification'),
-        #     img=serializer.data.get('img'),
-        #     modules=serializer.data.get('modules'),
-        #     teacher=serializer.data.get('teacher'),
-        #     description=serializer.data.get('description'),
-        #     price=serializer.data.get('price')
-        #     )
-        # course=Course.objects.all().filter(title=request.data['id']).values()
-        # # return Response({'Message':'New Course added','Course':course})
-        # return HttpResponseRedirect(f'/courseApi/{request.data["id"]}')
-        
-    def put(self, request):
-        content={
-            'Youre calling a put method'
-        }
-        return Response(content)
+        try:
+            url = request.data['url']
+            response = get_data(url)
+            return Response({'ok':True,'data':response})
+        except Exception as e:
+            return Response({'ok':False,'error':str(e)})
 
-    def patch(self, request):
-        content={
-            'Youre calling a pacth method'
-        }
-        return Response(content)
-
-    def delete(self, request):
-        content ={
-            'Youre calling a delete method'
-        }
-        return Response(content)
+class PaginationView(generics.ListAPIView):
+    queryset = Course.objects.all()
+    serializer_class = CourseSerializer
+    pagination_class = CourseCPagination
+    permission_classes = [
+        IsAuthenticated
+    ]
+    
+class PaginationViewVehicle(generics.ListAPIView):
+    queryset = Vehicle.objects.all()
+    serializer_class = vehicleSerializer
+    pagination_class = CourseCPagination
+    permission_classes = [
+        IsAuthenticated
+    ]
 
 class NewApi(APIView):
     serializer_class=Alumn
     def get(self,request,format=None):
+        # courses = 
         return Response({'Get method'})
 
     def post(self, request):
