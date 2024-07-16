@@ -1,13 +1,12 @@
 from rest_framework import serializers
-from rest_framework.serializers import CharField, ValidationError, ModelSerializer
+from rest_framework.serializers import ModelSerializer
 from .models import Course, Teacher, Vehicle,Alumn
-from rest_framework.response import Response
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ('id','title', 'qualification','img','modules','teacher','description','price')
-        read_only_fields = ('date', )
+        # read_only_fields = ('date', )
         
 class vehicleSerializer(serializers.ModelSerializer):
     class Meta:
@@ -29,5 +28,7 @@ class Url(ModelSerializer):
         alumno = Alumn(name=nam,url=ur)
         alumno.save()
         return alumno
-class Alumn(serializers.Serializer):
+
+class Alumn(serializers.Serializer):  
     name = serializers.CharField(max_length=15)
+  

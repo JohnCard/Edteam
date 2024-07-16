@@ -1,49 +1,37 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.utils import timezone
 
-# Create your models here.
-        
-class Teacher(models.Model):
+# Create your models here. 
+    
+class User(models.Model):
     name = models.CharField(max_length=30)
-    age = models.PositiveBigIntegerField(
-        validators=[
-            MinValueValidator(25),
-            MaxValueValidator(90)
-        ]
-    )
-    experience = models.PositiveIntegerField()
-    courses = models.TextField()
+    # birthday = models.DateField(null=True, blank=True)
+    url = models.SlugField(max_length=40, null=True)
+    # created = models.DateTimeField(default=timezone.now().date().strftime('%Y-%m-%d'))
+    # updated_at = models.DateTimeField(default=timezone.now().date().strftime('%Y-%m-%d'))
+    
+    class Meta:
+        abstract = True
         
-OPTIONS = [
-    ('opt 1','Álvaro Felipe'),
-    ('opt 2','Beto Quiroga'),
-    ('opt 3','Alexys Lozada'),
-    ('opt 4','Johnny'),
-    ('opt 5','Queta Rodriguez'),
-    ('opt 6','Oscar Alzada')
-] 
-        
+    def __str__(self):
+        return self.name
+
+class Teacher(User):
+    experience = models.IntegerField()  
+          
 class Course(models.Model):
-    # id = models.IntegerField(primary_key=True)
     title = models.CharField(max_length=50)
-    qualification = models.PositiveSmallIntegerField(
-        validators=[
-            MinValueValidator(0),
-            MaxValueValidator(10)
-        ],
+    qualification = models.IntegerField(
         default=7
     )
     img = models.ImageField(default='https://assets-global.website-files.com/6410ebf8e483b5bb2c86eb27/6410ebf8e483b53d6186fc53_ABM%20College%20Web%20developer%20main.jpg')
-    # date = models.DateField(auto_now_add=True)
-    modules = models.PositiveSmallIntegerField(default=5,
-                                               validators=[
-            MinValueValidator(1),
-            MaxValueValidator(12)
-        ])
-    teacher = models.CharField(max_length=30,choices=OPTIONS,default='Álvaro Felipe')
+    modules = models.IntegerField(default=5)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=False)
     description = models.TextField(default='A good course to learning this technology')
-    price = models.PositiveSmallIntegerField(default=400)
-    created = models.DateTimeField(auto_now_add=True)
+    price = models.IntegerField(default=400)
+    # updated_at = models.DateTimeField(auto_now=True)
+    # created = models.DateTimeField(auto_now_add=True)
     
     def get_absolute_url(self):
         return f'/detailCourse/{self.id}'
@@ -53,7 +41,7 @@ class Course(models.Model):
     
     def get_delete_url(self):
         return f'/updateCourse/{self.id}/delete'
-    
+
 class Vehicle(models.Model):
     owner = models.CharField(max_length=35)
     plaque = models.CharField(max_length=20)
@@ -67,8 +55,5 @@ class Vehicle(models.Model):
     folio = models.IntegerField()
     created = models.DateTimeField(auto_now_add=True)
     
-class Alumn(models.Model):
-    name = models.CharField(max_length=10)
-    url = models.CharField(max_length=40)
-    created = models.DateTimeField(auto_now_add=True)
-    
+class Alumn(User):
+    score = models.IntegerField(null=True, blank=True)
