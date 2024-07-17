@@ -4,3 +4,4 @@ __pycache__
 staticfiles/
 
 /Coursera/migrations
+/YouTube/migrations 

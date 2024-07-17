@@ -12,9 +12,13 @@ class TeacherAdmin(admin.ModelAdmin):
     search_fields = ('id', )
     ordering = ['id', ]
     
+class AlumnAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    search_fields = ('id', )
+    ordering = ['id', ]
 
-# admin.site.register(Course, CourseAdmin)
-# admin.site.register(Teacher)
-# admin.site.register(Alumn)
-# admin.site.register(Vehicle)
+admin.site.register(Course, CourseAdmin)
+admin.site.register(Teacher, TeacherAdmin)
+admin.site.register(Alumn, AlumnAdmin)
+admin.site.register(Vehicle)
 

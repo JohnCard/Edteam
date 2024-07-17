@@ -1,37 +1,26 @@
 from django.db import models
-from django.core.validators import MinValueValidator, MaxValueValidator
-from django.utils import timezone
 
 # Create your models here. 
     
 class User(models.Model):
-    name = models.CharField(max_length=30)
-    # birthday = models.DateField(null=True, blank=True)
-    url = models.SlugField(max_length=40, null=True)
-    # created = models.DateTimeField(default=timezone.now().date().strftime('%Y-%m-%d'))
-    # updated_at = models.DateTimeField(default=timezone.now().date().strftime('%Y-%m-%d'))
+    name = models.CharField(max_length=35, verbose_name='Nombre', null=False, blank=False)
+    birthday = models.DateField(verbose_name='Fecha de nacimiento', null=True, blank=True)
+    url = models.SlugField(max_length=15, verbose_name='Url de usuario', null=True, blank=True)
     
     class Meta:
         abstract = True
-        
-    def __str__(self):
-        return self.name
 
 class Teacher(User):
-    experience = models.IntegerField()  
+    experience = models.IntegerField(verbose_name='Años de experiencia', null=False, blank=False)  
           
 class Course(models.Model):
-    title = models.CharField(max_length=50)
-    qualification = models.IntegerField(
-        default=7
-    )
-    img = models.ImageField(default='https://assets-global.website-files.com/6410ebf8e483b5bb2c86eb27/6410ebf8e483b53d6186fc53_ABM%20College%20Web%20developer%20main.jpg')
-    modules = models.IntegerField(default=5)
-    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, null=False)
-    description = models.TextField(default='A good course to learning this technology')
-    price = models.IntegerField(default=400)
-    # updated_at = models.DateTimeField(auto_now=True)
-    # created = models.DateTimeField(auto_now_add=True)
+    title = models.CharField(max_length=20, verbose_name='Titulo del curso', null=False, blank=False, unique=True)
+    qualification = models.IntegerField(default=8, verbose_name='Calificación', null=True, blank=True)
+    img = models.ImageField(default='https://assets-global.website-files.com/6410ebf8e483b5bb2c86eb27/6410ebf8e483b53d6186fc53_ABM%20College%20Web%20developer%20main.jpg', verbose_name='Imagen de fondo', null=True, blank=True)
+    modules = models.IntegerField(verbose_name='Cantidad de modulos', default=5, null=True, blank=True)
+    teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Profesor del curso', null=False)
+    description = models.TextField(verbose_name='Descripcción', default='A good course', null=True, blank=True)
+    price = models.IntegerField(verbose_name='Precio del curso', default=400, null=True, blank=True)
     
     def get_absolute_url(self):
         return f'/detailCourse/{self.id}'
@@ -56,4 +45,4 @@ class Vehicle(models.Model):
     created = models.DateTimeField(auto_now_add=True)
     
 class Alumn(User):
-    score = models.IntegerField(null=True, blank=True)
+    score = models.IntegerField(verbose_name='Promedio del alumno', null=True, blank=True)

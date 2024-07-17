@@ -9,7 +9,13 @@ const URL = import.meta.env.VITE_BACKEND_URL
 
 const coursesApi = axios.create({
   baseURL: `${URL}/NewApi/`,
-});
+})
+
+const teachersApi = axios.create({
+  baseURL: `${URL}/teacher`
+})
+
+export const getTeachers = () => teachersApi.get('/')
 
 export const getAllCourses = () => coursesApi.get("/");
 

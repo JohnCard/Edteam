@@ -18,6 +18,11 @@ class TeacherSerializer(serializers.ModelSerializer):
         model = Teacher
         fields = ('id','name','age','experience','courses')
         
+class TeacherSerializerSec(serializers.ModelSerializer):
+    class Meta:
+        model = Teacher
+        fields = '__all__'
+        
 class Url(ModelSerializer):
     class Meta:
         model = Alumn

@@ -31,23 +31,6 @@ def get_data(link):
     values['finish init'] = return_value('fw-bold fs-6 text-gray-800 d-flex align-items-center',6)
     
     return values
-    
-from datetime import datetime
-from django.core.exceptions import ValidationError
-
-def convert_date_format(date_str):
-    try:
-        return datetime.strptime(date_str, '%d-%m-%Y').strftime('%Y-%m-%d')
-    except ValueError:
-        raise ValidationError('Invalid date format. It must be in DD-MM-YYYY format.')
-
-# from .models import Specialty
 
 # Create your tests here.
 
-from .models import Teacher
-
-# for instance in Teacher.objects.all():
-#     instance.created = convert_date_format(instance.created)
-#     instance.save()
-Teacher.objects.all().delete()
