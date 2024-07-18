@@ -12,11 +12,11 @@ class User(models.Model):
 
 class Teacher(User):
     experience = models.IntegerField(verbose_name='Años de experiencia', null=False, blank=False)  
-          
+
 class Course(models.Model):
     title = models.CharField(max_length=20, verbose_name='Titulo del curso', null=False, blank=False, unique=True)
     qualification = models.IntegerField(default=8, verbose_name='Calificación', null=True, blank=True)
-    img = models.ImageField(default='https://assets-global.website-files.com/6410ebf8e483b5bb2c86eb27/6410ebf8e483b53d6186fc53_ABM%20College%20Web%20developer%20main.jpg', verbose_name='Imagen de fondo', null=True, blank=True)
+    img = models.ImageField(default='https://edteam-media.s3.amazonaws.com/courses/medium/c498682a-3622-4f5e-80bc-2cc299a47f89.png', verbose_name='Imagen de fondo', null=True, blank=True)
     modules = models.IntegerField(verbose_name='Cantidad de modulos', default=5, null=True, blank=True)
     teacher = models.ForeignKey(Teacher, on_delete=models.CASCADE, verbose_name='Profesor del curso', null=False)
     description = models.TextField(verbose_name='Descripcción', default='A good course', null=True, blank=True)

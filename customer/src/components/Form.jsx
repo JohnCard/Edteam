@@ -3,6 +3,7 @@ import { createCourse, getTeachers, getCourse, deleteCourse, updateCourse } from
 import toast from "react-hot-toast";
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from "react-router-dom";
+import './Form.css'
 
 function FormCourse() {
 
@@ -61,13 +62,7 @@ function FormCourse() {
     navigate('/')
   }
   catch (error) {
-    toast.success(`Something went wrong! ${error}`, {
-      position: "bottom-right",
-      style: {
-        background: "blue",
-        color: "red",
-      },
-      });
+    throw new Error(`Error ${error.response.data}`)
   }
   finally{
     reset()
@@ -76,13 +71,13 @@ function FormCourse() {
 
   return (
     <>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"></link>
     <form onSubmit={onSubmit}>
       <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"></link>
       <input
         type="text"
         placeholder="Title"
-        {
-          ...register("title", 
+        {...register("title", 
             { 
             required: {
               value: true,
@@ -95,12 +90,10 @@ function FormCourse() {
             maxLength: {
               value: 20,
               message: 'Mayor a lo permitido'
-            }
-          })}
+            }})}
         autoFocus
       />
       {errors.title && <span>{errors.title.message}</span>}
-
       <select {
         ...register("teacher",
         { 
@@ -115,12 +108,38 @@ function FormCourse() {
         </option>
       ))}
       </select>
-      {errors.teacher && <span>{errors.teacher.message}</span> }
+      {errors.teacher && <span>{errors.teacher.message}</span>}
+      <input 
+      type="number" 
+      placeholder="Qualification"
+      {...register('qualification',
+        {
+          min: {
+            value: 0,
+            message: 'No puede ser menor a 0'
+          },
+          max: {
+            value: 10,
+            message: 'No puede exceder a 10'
+          }
+        })}
+      />
+      {errors.qualification && <span>{errors.qualification.message}</span>}
+      <input 
+      type="number" 
+      placeholder="Modules"
+      {...register('modules')}
+      />
+      <textarea cols="30" rows="10" placeholder="Description"></textarea>
+      <input
+      type="number"
+      placeholder="Price"
+      {...register('price')}
+      />
       <button>
         Save
       </button>
-    </form>
-    {params.id && (
+      {params.id && (
           <button
             onClick={async () => {
               const accepted = window.confirm("Are you sure?");
@@ -138,6 +157,7 @@ function FormCourse() {
             }}
         >delete</button>
       )}
+    </form>
     </>
   )
 }

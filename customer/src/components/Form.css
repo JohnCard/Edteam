@@ -1,0 +1,120 @@
+/* Tipografía */
+body {
+    font-family: 'Press Start 2P', sans-serif;
+    background-color: #1e1e1e;
+    color: #cfcfcf;
+    margin: 0;
+    padding: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    background-color: #000033;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul li {
+    margin: 10px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #cfcfcf;
+    transition: color 0.3s ease-in-out;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #2a2a2a;
+}
+
+nav ul li a:hover,
+nav ul li a.active {
+    color: #1e90ff;
+    background-color: #1e1e1e;
+}
+
+/* Estilo del Formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #2a2a2a;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    margin: 20px auto;
+    animation: slideIn 0.5s ease-in-out;
+}
+
+form input[type="text"],
+form input[type="number"],
+form select,
+form textarea,
+form button {
+    font-family: 'Press Start 2P', sans-serif;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin: 5px 0;
+    background-color: #1e1e1e;
+    color: #cfcfcf;
+    outline: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+form input[type="text"]::placeholder,
+form input[type="number"]::placeholder,
+form textarea::placeholder {
+    color: #888;
+}
+
+form input[type="text"]:focus,
+form input[type="number"]:focus,
+form select:focus,
+form textarea:focus {
+    background-color: #000033;
+    color: #1e90ff;
+}
+
+form button {
+    background-color: #1e90ff;
+    color: #1e1e1e;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+form button:hover {
+    background-color: #00cccc;
+    color: #fff;
+}
+
+button.delete {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+button.delete:hover {
+    background-color: #ff4500;
+    transform: scale(1.05);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

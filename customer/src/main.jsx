@@ -12,6 +12,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
                 <Route path='/' element={<Menu />} >
                     <Route index element={<App />} />
                     <Route path='/Form' element={<FormCourse />} />
+                    <Route path='/Form/:id' element={<FormCourse />} />
                 </Route>
             </Routes>
             <Toaster />

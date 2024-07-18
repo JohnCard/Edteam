@@ -23,6 +23,6 @@ export const getCourse = (id) => coursesApi.get(`/${id}`);
 
 export const createCourse = (course) => coursesApi.post("/", course);
 
-export const updateCourse = (id, course) => coursesApi.put(`/${id}/`, course);
+export const updateCourse = (id, course) => coursesApi.put(`/${id}`, course);
 
 export const deleteCourse = (id) => coursesApi.delete(`/${id}`);

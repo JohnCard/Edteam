@@ -19,15 +19,17 @@ function Courses() {
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet"></link>
     <h1>Courses</h1>
     <ul>
-      {courses.map(({id, title, description, qualification, modules, price, teacher}) => (
+      {courses.map(({id, title, description, qualification, modules, price, teacher, img}) => (
         <li key={id}>
           <Course 
+          id={id}
           title={title} 
           description={description} 
           qualification={qualification} 
           modules={modules} 
           price={price} 
           teacher={teacher}
+          img={img}
           />
         </li>
       ))}
