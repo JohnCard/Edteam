@@ -112,6 +112,7 @@ class NewApi(APIView):
         # courses = Course.objects.all()
         # serializer = CourseSerializer(courses, many=True)
         # return Response(serializer.data)
+        
         id = id
         if id is not None:
             course = Course.objects.get(id=id)

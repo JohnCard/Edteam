@@ -9,7 +9,7 @@ function Course({id, title, description, qualification, modules, teacher, price,
     onClick={() => {
       navigator(`/Form/${id}`)
     }}>
-      <img src='https://edteam-media.s3.amazonaws.com/courses/medium/c498682a-3622-4f5e-80bc-2cc299a47f89.png' alt={title} />
+      <img src='https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Python.svg/640px-Python.svg.png' alt={title} />
       <h1>{title}</h1>
       <p>{description}</p>
       <p>Score: {qualification}</p>
