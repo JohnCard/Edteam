@@ -1,26 +1,34 @@
 {% extends "Detail.html" %}
 {% load static %}
 {% block style %} 
+{% comment %} define stylesheet {% endcomment %}
 <link rel='stylesheet' href="{% static 'Update10.css' %}">
 {% endblock style %}
 {% block title %}
+    {% comment %} template title {% endcomment %}
     <title>Updating {{course.title}} course</title>
 {% endblock title %}
 {% block main %}
 <br><br><br><br><br><br><br><br><br><br><br><br>
     <main>
-        <h1>Upgrade the item: {{course.title}} course</h1>
+        {% comment %} main title {% endcomment %}
+        <h1>Upgrade the item: {{course.title}} course</h1> 
+        {% comment %} template form {% endcomment %}
         <form method='POST' action=''>
             {% csrf_token %}
             {{form.as_p}}
-            <a href='/Detail/{{course.id}}'>Cancelll !!!</a>
+            {% comment %} cancel button {% endcomment %}
+            <a href='/Detail/{{course.id}}'>Cancel !!!</a>
+            {% comment %} go to delete page {% endcomment %}
             <a href='/Delete/{{course.id}}'>Wanna delete the {{course.title}} Course???</a>
+            {% comment %} confirmation button {% endcomment %}
             <input type='submit' value='Update'>
         </form>
     </main>
 {% endblock main %}
 {% block footer %}
 <footer>
+    {% comment %} back to courses page {% endcomment %}
     <a href='/Courses/'>🏟️ Courses</a>
 </footer>
 {% endblock footer %}

@@ -1,17 +1,12 @@
 from rest_framework import serializers
 from rest_framework.serializers import ModelSerializer
-from .models import Course, Teacher, Vehicle,Alumn
+from .models import Course, Teacher, Alumn
 
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
         fields = ('id','title', 'qualification','img','modules','teacher','description','price')
         # read_only_fields = ('date', )
-        
-class vehicleSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Vehicle
-        fields = ('id','owner', 'plaque', 'vin', 'brand','sub_brand','verify_reason','service','line','no_tech','folio')
         
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:

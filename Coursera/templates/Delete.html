@@ -1,24 +1,32 @@
 {% extends "Detail.html" %}
 {% load static %}
 {% block style %}
+    {% comment %} define your stylesheet {% endcomment %}
     <link rel='stylesheet' href="{% static 'Del3.css' %}">
 {% endblock style %}
 {% block title %}
+    {% comment %} template title {% endcomment %}
     <title>Deleting the {{course.title}} course</title>
 {% endblock title %}
 {% block main %}
     <main>
+        {% comment %} form template {% endcomment %}
     <form method='POST' action=''>
+        {% comment %} main title {% endcomment %}
         <h1>Delete - {{course.title}}</h1>
         {% csrf_token %}
+        {% comment %} confirmation title {% endcomment %}
         <h2>¿Are you sure to delete the {{course.title}} course???</h2>
+        {% comment %} submit input {% endcomment %}
         <input type='submit' value='Delete course'>
     </form>
     </main>
 {% endblock main %}
 {% block footer %}
 <footer>
+        {% comment %} link to courses/instances template {% endcomment %}
         <a href='/Courses/'>🏟️ Back to Courses view</a><br><br>
+        {% comment %} go to course detail template {% endcomment %}
         <a href='/Detail/{{course.id}}'>Cancelll !!!</a>
 </footer>
 {% endblock footer %}

@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Course,Teacher,Vehicle,Alumn
+from .models import Course, Teacher, Alumn
 # Register your models here.
 
 class CourseAdmin(admin.ModelAdmin):
@@ -11,7 +11,6 @@ class TeacherAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     search_fields = ('id', )
     ordering = ['id', ]
-    
 class AlumnAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
     search_fields = ('id', )
@@ -20,5 +19,4 @@ class AlumnAdmin(admin.ModelAdmin):
 admin.site.register(Course, CourseAdmin)
 admin.site.register(Teacher, TeacherAdmin)
 admin.site.register(Alumn, AlumnAdmin)
-admin.site.register(Vehicle)
 

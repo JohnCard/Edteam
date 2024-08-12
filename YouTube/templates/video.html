@@ -9,33 +9,46 @@
     {% endblock style %}
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     {% block title %}
+        {% comment %} template title {% endcomment %}
         <title>{{video.title}}</title>
     {% endblock title %}
 </head>
 <body>
     {% block header %}
         <header>
+            {% comment %} main title {% endcomment %}
             <h1 class="titulo">{{video.title}}</h1>
         </header>
     {% endblock header %}
     {% block main %}
         <main>
             <div class="contenedor">
+                {% comment %} define control properties {% endcomment %}
                 <video class="fm-video video-js vjs-16-9 vjs-big-play-centered" data-setup="{}" controls id="fm-video">
+                    {% comment %} video source direction {% endcomment %}
                     <source src="video/keyboard.mp4" type="video/mp4">
                 </video>
                 </br></br></br></br>
                 <article>
                     <div>
+                        {% comment %} video title {% endcomment %}
                     {{video.title}}</br></br>
+                    {% comment %} video created date {% endcomment %}
                     Date: {{video.date}}</br></br>
+                    {% comment %} how many times was viewed {% endcomment %}
                     Views: {{video.views}}</br></br>
+                    {% comment %} duration video {% endcomment %}
                     Time to check: {{video.during}}</br></br>
+                    {% comment %} author video {% endcomment %}
                     Published by {{video.youtuber}}</br></br>
+                    {% comment %} video description {% endcomment %}
                     Description: {{video.description}}</br></br>
+                    {% comment %} additional comments {% endcomment %}
                     Thanks for Watching, Good Bye!!!</br></br>
+                    {% comment %} back to videos page {% endcomment %}
                     <a href='/Videos/'>Back to tubes list!!!</a>
                     </div>
+                    {% comment %} background image tube {% endcomment %}
                     <img src="{{video.img}}" alt="tube.title" height='300'><br><br>
                 </article>
                 

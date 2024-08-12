@@ -59,8 +59,6 @@ ROOT_URLCONF = 'EDteam.urls'
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        # Tell Django where to find Reacts index.html file
-        # 'DIRS': [BASE_DIR / 'templates'],
         "DIRS": [os.path.join(BASE_DIR, "customer", "dist")],
         "APP_DIRS": True,
         "OPTIONS": {
@@ -81,8 +79,12 @@ WSGI_APPLICATION = 'EDteam.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'sakila',
+        'USER': 'root',
+        'PASSWORD': 'Office@check13',
+        'HOST': 'localhost',
+        'PORT': '3306'
     }
 }
 

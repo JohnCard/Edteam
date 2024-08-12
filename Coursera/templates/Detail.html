@@ -5,16 +5,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     {% block style %}
+    {% comment %} define stylesheet {% endcomment %}
         <link rel='stylesheet' href="{% static 'Detail6.css' %}">
     {% endblock style %}
+    {% comment %} font-family link {% endcomment %}
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     {% block title %}
+    {% comment %} course title {% endcomment %}
         <title>{{course.title}}</title>
     {% endblock title %}
 </head>
 <body>
     {% block header %}
         <header>
+        {% comment %} link to createa new course/instance {% endcomment %}
             <a href='/Form/'>Create a new Course</a>
         </header>
     {% endblock header %}
@@ -22,20 +26,30 @@
         <br><br><br><br><br><br><br><br><br><br><br><br>
         <main>
             <div>
+            {% comment %} course title {% endcomment %}
             <h1>{{course.title}}</h1>
+            {% comment %} price {% endcomment %}
             <h3>Valorado en ${{course.price}}</h3>
+            {% comment %} created date {% endcomment %}
             <h3>Posted in {{course.date}}</h3>
+            {% comment %} qualification {% endcomment %}
             <h3>Rated {{course.qualification}}/10</h3>
+            {% comment %} teacher who leads {% endcomment %}
             <h3>Dicted by {{course.teacher}}</h3>
+            {% comment %} course description {% endcomment %}
             <p>{{course.description}}</p>
             </div>
+            {% comment %} background image {% endcomment %}
             <img src='{{course.img}}' alt='{{course.title}}' width='500'>
         </main>
     {% endblock main %}
     {% block footer %}
         <footer>
+            {% comment %} link to update {% endcomment %}
             <a href='/Update/{{course.id}}'>Update this course!!!</a>
+            {% comment %} link to delete {% endcomment %}
             <a href='/Delete/{{course.id}}'>Wanna delete this course???</a>
+            {% comment %} link to courses template {% endcomment %}
             <a href='/Courses/'>🏟️ Courses</a>
         </footer>
     {% endblock footer %}

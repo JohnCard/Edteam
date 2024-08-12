@@ -6,8 +6,10 @@ function Menu() {
     <>
     <nav>
         <ul>
-          {/* NavLink esta diseñado para funcionar dentro del menu principal y Link esta diseñdo para funcionar dentro del BrowseRouter */}
+          {/* NavLink was designed to work within main menu and Link was designed to work into BrowseRouter */}
+            {/* go to the init */}
             <li><NavLink to='/' >Init</NavLink></li>
+            {/* go to create a new course */}
             <li><NavLink to='/Form' > Form</NavLink></li>
             <Outlet />
         </ul>

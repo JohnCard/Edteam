@@ -17,6 +17,7 @@
 				<a href="#" class="logo"><i class="fas fa-play"></i></a>
 			</div>
 
+			{% comment %} search main input {% endcomment %}
 			<div class="barra-busqueda">
 				<form method='GET' action='/Videos/'>
 				<input type="text" placeholder="Buscar" name='q'>
@@ -31,6 +32,7 @@
 			</div>
 		</header>
 
+		{% comment %} main content list {% endcomment %}
 		<nav class="menu-lateral">
 			<a href="#" class="active"><i class="fas fa-home"></i>Main page</a>
 			<a href="#"><i class="fas fa-fire"></i> Thendings</a>
@@ -49,15 +51,21 @@
 			<a href="#"><i class="fas fa-folder"></i> Let´s go</a>
 		</nav>
 
+		{% comment %} recommended content {% endcomment %}
 		<main class="main">
 			<h3 class="titulo">Videos Recomendados</h3>
 			<ol class="grid-videos">
                 {% for tube in Videos %}
                 <li>
+					{% comment %} video link {% endcomment %}
 				<a href='/video/{{tube.id}}' class="video">
+					{% comment %} background image {% endcomment %}
 					<img src="{{tube.img}}" alt="tube.title"><br><br>
+					{% comment %} video title {% endcomment %}
                     <p>{{tube.title}}<br><br>
+					{% comment %} author video {% endcomment %}
                     {{tube.youtuber}}<br><br>
+					{% comment %} amount views | published date {% endcomment %}
                     {{tube.views}} views | {{tube.date}}</p>
                 </a>
                 </li>

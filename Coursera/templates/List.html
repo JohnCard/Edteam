@@ -10,10 +10,13 @@
     <link rel="icon" href="search.ico">
 </head>
 <body>
+    {% comment %} Define your template title {% endcomment %}
     <header>
         {% block header %}
+        {% comment %} link to createa new course/instance {% endcomment %}
             <a href='/Form/'>Create a new Course</a>
             <form method='GET' action='/Courses/'>
+                {% comment %} input to search a course {% endcomment %}
                     <input type='text' name='q'>
             </form>
         {% endblock header %}
@@ -22,16 +25,24 @@
     <main>
         <ol>
             {% block main %}
+            {% comment %} travel all your courses data to build distinct li elements for each course {% endcomment %}
             {% for course in Courses %}
                 <li> 
+                    {% comment %} cotain your course link {% endcomment %}
                 <a href='/Detail/{{course.id}}'>
                 <img src='{{course.img}}' alt='{{course.title}}' height='170'> 
                 </a> 
+                {% comment %} course title {% endcomment %}
                 <h2>{{course.title}}</h2>
+                {% comment %} qualification {% endcomment %}
                 <p>Calificación de la audiencia: {{course.qualification}}</p>
+                {% comment %} date this course was created {% endcomment %}
                 <p>Estrenado el {{course.date}}</p>
+                {% comment %} teacher who perform {% endcomment %}
                 <p>Este curso fue dictado por {{course.teacher}}</p>
+                {% comment %} course description {% endcomment %}
                 <p>Opinión mas frecuente: {{course.description}}</p>
+                {% comment %} course price {% endcomment %}
                 <p class='price'>Valorado en ${{course.price}}</p>
                 </li>
             {% endfor %}
@@ -39,6 +50,7 @@
         </ol>
     </main>
     <footer>
+        {% comment %} additional link {% endcomment %}
         <a href="">Visit our Redes</a>
     </footer>
 </body>

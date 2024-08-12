@@ -1,27 +1,33 @@
 {% extends "Detail.html" %}
 {% load static %}
 {% block style %}
+{% comment %} define your stylesheet {% endcomment %}
 <link rel='stylesheet' href="{% static 'Form2.css' %}">
 {% endblock style %}
 {% block title %}
+{% comment %} template title {% endcomment %}
 <title>Create your own Course</title>
 {% endblock title %}
 {% block header %}
 <header>
+    {% comment %} main title {% endcomment %}
     <h1>Create your own course</h1>
 </header>
 {% endblock header %}
 {% block main %}
 <main>
+    {% comment %} form course {% endcomment %}
     <form method="POST" action='.'>
         {% csrf_token %}
         {{ form.as_p}}
+        {% comment %} submit input {% endcomment %}
         <input type='submit' value='Create'>
     </form>
 </main>
 {% endblock main %}
 {% block footer %}
 <footer>
+    {% comment %} all courses/instances link {% endcomment %}
     <a href='/Courses/'>🏟️ Courses</a>
 </footer>
 {% endblock footer %}
