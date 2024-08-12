@@ -11,7 +11,7 @@ from rest_framework.permissions import IsAuthenticated
 import json
 from .forms import CourseForm, formCourse
 from .models import Course, Teacher
-from .mixins import TitleMixin, linkMixin, styleMix
+from .mixins import TitleMixin, LinkMixin, StyleMix
 from .serializers import CourseSerializer, TeacherSerializerSec
 from .pagination import CourseCPagination
 
@@ -312,7 +312,7 @@ def delete(request, id_course):
     }
     return render(request, 'Delete.html',context)
 
-class deleteCourse(DeleteView):
+class DeleteCourse(DeleteView):
     # define mode
     model = Course
     # define template
@@ -330,7 +330,7 @@ class deleteCourse(DeleteView):
     def get_success_url(self):
         return '/allCourses/'
 
-class coursesView(TitleMixin, ListView):
+class CoursesView(TitleMixin, ListView):
     # define mode
     model = Course
     # template title
@@ -342,7 +342,7 @@ class coursesView(TitleMixin, ListView):
     def get_queryset(self):
         return Course.objects.all()
     
-class createView(CreateView, linkMixin, styleMix, ListView): 
+class CreateView(CreateView, LinkMixin, StyleMix, ListView): 
     # define class form
     form_class = CourseForm
     # define class template
@@ -365,7 +365,7 @@ class createView(CreateView, linkMixin, styleMix, ListView):
     def form_invalid(self,form):
         return super().form_invalid(form)
     
-class detailView(DetailView):
+class DetailView(DetailView):
     # define model
     model = Course 
     # define template class
@@ -379,7 +379,7 @@ class detailView(DetailView):
         queryset = Course.objects.filter(pk=course_id)
         return queryset
     
-class updateView(UpdateView):
+class UpdateView(UpdateView):
     # define form class
     form_class = formCourse
     # define template class

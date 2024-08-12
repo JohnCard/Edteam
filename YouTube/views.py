@@ -18,7 +18,7 @@ def list(request):
         )
     # build context
     context = {
-        'Videos':set
+        'videos':set
     }
     return render(request,'main.html',context)
 

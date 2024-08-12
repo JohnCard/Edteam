@@ -8,7 +8,7 @@ class TitleMixin(object):
     def get_title(self):
         return self.title
     
-class linkMixin(object):
+class LinkMixin(object):
     link = None
     
     def get_context_data(self,*args,**kwargs):
@@ -18,7 +18,7 @@ class linkMixin(object):
     def get_link(self):
         return self.link
 
-class styleMix(object):
+class StyleMix(object):
     stylesheet = None 
     
     def get_context_data(self,*args,**kwargs):

@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import detail, form, update, delete, coursesView, createView, detailView, updateView, deleteCourse, CourseApis,CourseNewApi, PaginationView, CourseView, TeacherView
+from .views import detail, form, update, delete, list, CoursesView, CreateView, DetailView, UpdateView, DeleteCourse, CourseApis,CourseNewApi, PaginationView, CourseView, TeacherView
 
 router = routers.DefaultRouter()
 # Define course api routers
@@ -30,13 +30,13 @@ urlpatterns = [
     # delete course
     path('delete/<int:id_course>', delete),
     # list all courses
-    path('all-courses/', coursesView.as_view()),
+    path('all-courses/', CoursesView.as_view()),
     # create a new course
-    path('create-course/', createView.as_view()),
+    path('create-course/', CreateView.as_view()),
     # retrieve a course data
-    path('detail-course/<int:pk>', detailView.as_view()),
+    path('detail-course/<int:pk>', DetailView.as_view()),
     # update course
-    path('update-course/<int:pk>/', updateView.as_view()),
+    path('update-course/<int:pk>/', UpdateView.as_view()),
     # delete course
-    path('update-course/<int:pk>/delete/', deleteCourse.as_view()),
+    path('update-course/<int:pk>/delete/', DeleteCourse.as_view()),
 ]
