@@ -15,17 +15,26 @@ import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
+
+# Pulling environment variables
+PASSWORD = os.getenv('PASSWORD')
+DATABASE = os.getenv('DATABASE')
+KEY = os.getenv('SECRET_KEY')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-7!_n@-y*&c&3!qefly8w=zyyzd4=20z7_cbfkyey$d7i+)m$##'
+SECRET_KEY = KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['your-vercel-domain.vercel.app']
+ALLOWED_HOSTS = ['django-react.vercel.app']
 
 # Application definition
 
@@ -58,7 +67,7 @@ ROOT_URLCONF = 'EDteam.urls'
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [os.path.join(BASE_DIR, "customer", "dist")],
+        "DIRS": [],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -79,11 +88,11 @@ WSGI_APPLICATION = 'EDteam.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'sakila',
-        'USER': 'root',
-        'PASSWORD': 'Office@check13',
-        'HOST': 'localhost',
-        'PORT': '3306'
+        'NAME': DATABASE,
+        'USER': PASSWORD,
+        'PASSWORD': PASSWORD,
+        'HOST': 'sql3.freesqldatabase.com',
+        'PORT': 3306
     }
 }
 

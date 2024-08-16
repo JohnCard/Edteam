@@ -5,3 +5,6 @@ staticfiles/
 
 /Coursera/migrations
 /YouTube/migrations 
+
+# environmental
+.env
