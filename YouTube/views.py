@@ -18,18 +18,18 @@ def list(request):
         )
     # build context
     context = {
-        'videos':set
+        'videos': set
     }
     return render(request,'main.html',context)
 
-def video(request,id):
+def video(request, id):
     # get instance/404 error
     instance = get_object_or_404(Video,id=id)
     # build context
     context = {
         'video': instance
     }
-    return render(request, 'video.html',context)
+    return render(request, 'video.html', context)
 
 def interface(request):
     return render(request,'Interface.html')
