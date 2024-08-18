@@ -5,8 +5,8 @@ from .models import Course, Teacher, Alumn
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = ('id','title', 'qualification','img','modules','teacher','description','price')
-        # read_only_fields = ('date', )
+        fields = ('title', 'qualification' ,'modules','teacher','description','price')
+        read_only_fields = ('date', 'img')
         
 class TeacherSerializer(serializers.ModelSerializer):
     class Meta:

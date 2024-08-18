@@ -4,11 +4,11 @@
     {% if title %}
         <h1>{{ title }}</h1>
     {% endif %} 
-    <a href='/createCourse/'>Create a new Course</a>
+    <a href='/create-course/'>Create a new Course</a>
 {% endblock header %}
 {% block main %}
 {% for course in object_list %}
-    <a href='/detailCourse/{{course.id}}'>
+    <a href='/detail-course/{{course.id}}'>
     <li>
     <img src='{{course.img}}' alt='{{course.title}}' height='170'>   
     <h2>{{course.title}}</h2>

@@ -1,24 +1,20 @@
 from django.urls import path, include
 from rest_framework import routers
-from .views import detail, form, update, delete, list, CoursesView, CreateView, DetailView, UpdateView, DeleteCourse, CourseApis,CourseNewApi, PaginationView, CourseView, TeacherView
+from .views import detail, form, update, delete, list, CoursesView, CreateView, DetailView, UpdateView, DeleteCourse, PaginationView, CourseView, TeacherView, CourseGeneric
 
 router = routers.DefaultRouter()
 # Define course api routers
-router.register('api/courses', CourseApis, basename='Courses')
+router.register('course', CourseGeneric, basename='course')
 router.register('teacher', TeacherView, basename='teacher')
 
 urlpatterns = [
-    path('',include(router.urls)),
+    path('', include(router.urls)),
     # Paginating all courses data
     path('pagination/',PaginationView.as_view(), name='pagination'),
     # Listening, creating, updating and deleteing courses
-    path('course-view/', CourseView.as_view(), name='course_view'),
+    path('course-view/', CourseView.as_view(), name='course-view'),
     # retrieve course
-    path('course-view/<int:id>', CourseView.as_view(), name='course_view'),
-    # crud view for course instance
-    path('course-new-api/', CourseNewApi.as_view(),name='course_new_api'),
-    # retrieve course
-    path('course-new-api/<int:id>', CourseNewApi.as_view(),name='course_new_api'),
+    path('course-view/<int:id>', CourseView.as_view(), name='course-view'),
     # list all courses
     path('courses/', list),
     # retrieve a course data

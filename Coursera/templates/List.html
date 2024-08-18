@@ -14,8 +14,8 @@
     <header>
         {% block header %}
         {% comment %} link to createa new course/instance {% endcomment %}
-            <a href='/Form/'>Create a new Course</a>
-            <form method='GET' action='/Courses/'>
+            <a href='/form/'>Create a new Course</a>
+            <form method='GET' action='/courses/'>
                 {% comment %} input to search a course {% endcomment %}
                     <input type='text' name='q'>
             </form>
@@ -29,7 +29,7 @@
             {% for course in Courses %}
                 <li> 
                     {% comment %} cotain your course link {% endcomment %}
-                <a href='/Detail/{{course.id}}'>
+                <a href='/detail/{{course.id}}'>
                 <img src='{{course.img}}' alt='{{course.title}}' height='170'> 
                 </a> 
                 {% comment %} course title {% endcomment %}

@@ -33,13 +33,13 @@ class Course(models.Model):
     price = models.IntegerField(verbose_name='Precio del curso', default=400, null=True, blank=True)
     
     def get_absolute_url(self):
-        return f'/detailCourse/{self.id}'
+        return f'/detail-course/{self.id}'
     
     def get_edit_url(self):
-        return f'/updateCourse/{self.id}'
+        return f'/update-course/{self.id}'
     
     def get_delete_url(self):
-        return f'/updateCourse/{self.id}/delete'
+        return f'/update-course/{self.id}/delete'
     
 class Alumn(User):
     # score

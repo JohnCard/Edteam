@@ -16,7 +16,7 @@
 {% endblock title %}
 {% block header %}
 <header>
-    <a href='/Form/'>Create a new Course</a>
+    <a href='/form/'>Create a new Course</a>
 </header>
 {% endblock header %}
 {% block main %}
@@ -27,7 +27,7 @@
 <form method="POST" action='.'>
     {% csrf_token %}
     {{ form.as_p}}
-    <a href='/detailCourse/{{object.id}}'>Cancelll !!!</a>
+    <a href='/detail-course/{{object.id}}'>Cancelll !!!</a>
     <a href='{{object.get_delete_url}}'>Wanna delete the {{object.title}} course???</a> 
     <input type='submit' value='Update'>
 </form>
@@ -50,13 +50,13 @@
 {% block footer %}
 {% if form %}
 <footer>
-    <a href='/allCourses/'>Wanna back to all 🏟️ Courses list???</a>
+    <a href='/all-courses/'>Wanna back to all 🏟️ Courses list???</a>
 </footer>
 {% else %}
 <footer>
-    <a href='/updateCourse/{{object.id}}/'>Update this course!!!</a>
-    <a href='/updateCourse/{{object.id}}/delete/'>Wanna delete this course???</a>
-    <a href='/allCourses/'>Wanna back to all 🏟️ Courses list???</a>
+    <a href='/update-course/{{object.id}}/'>Update this course!!!</a>
+    <a href='/update-course/{{object.id}}/delete/'>Wanna delete this course???</a>
+    <a href='/all-courses/'>Wanna back to all 🏟️ Courses list???</a>
 </footer>
 {% endif %}
 {% endblock footer %}

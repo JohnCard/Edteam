@@ -18,9 +18,9 @@
             {% csrf_token %}
             {{form.as_p}}
             {% comment %} cancel button {% endcomment %}
-            <a href='/Detail/{{course.id}}'>Cancel !!!</a>
+            <a href='/detail/{{course.id}}'>Cancel !!!</a>
             {% comment %} go to delete page {% endcomment %}
-            <a href='/Delete/{{course.id}}'>Wanna delete the {{course.title}} Course???</a>
+            <a href='/delete/{{course.id}}'>Wanna delete the {{course.title}} Course???</a>
             {% comment %} confirmation button {% endcomment %}
             <input type='submit' value='Update'>
         </form>
@@ -29,6 +29,6 @@
 {% block footer %}
 <footer>
     {% comment %} back to courses page {% endcomment %}
-    <a href='/Courses/'>🏟️ Courses</a>
+    <a href='/courses/'>🏟️ Courses</a>
 </footer>
 {% endblock footer %}

@@ -23,6 +23,12 @@ class TeacherView(viewsets.ModelViewSet):
     # serializer class
     serializer_class = TeacherSerializerSec
 
+class CourseGeneric(viewsets.ModelViewSet):
+    # queryset
+    queryset = Course.objects.all()
+    # serializer class
+    serializer_class = CourseSerializer
+
 class PaginationView(generics.ListAPIView):
     # queryset
     queryset = Course.objects.all()
@@ -48,10 +54,11 @@ class CourseView(View):
             else:
                 datos = {'message': "Company not found..."}
             return JsonResponse(datos)
-        # pull all courses data
-        courses = list(Course.objects.values())
-        if len(courses) > 0:
-            datos = {'message': "Success", 'courses': courses}
+        else:
+            # pull all courses data
+            courses = list(Course.objects.values())
+            if len(courses) > 0:
+                datos = {'message': "Success", 'courses': courses}
         #! ¡empty data!
         datos = {'message': "courses not found..."}
         return JsonResponse(datos)
@@ -160,77 +167,6 @@ class CourseNewApi(APIView):
         course.delete()
         return Response({'msg': 'Deleted correctly'})    
 
-class CourseApis(viewsets.ModelViewSet):
-    # define serializer class
-    serializer_class = CourseSerializer
-    # get queryset
-    def get_queryset(self):
-        courses = Course.objects.all()
-        return courses
-    
-    def list(self):
-        # get all courses
-        courses = CourseSerializer(self.get_queryset(),many=True)
-        return Response(courses.data)
-            
-    def retrieve(self, **kwargs):
-        #? ¿does this course exist?
-        try: 
-            # filter course by id/pk
-            projects = Course.objects.filter(id=kwargs['pk'])
-            # serialize data
-            serializer = CourseSerializer(projects,many=True)
-            return Response(serializer.data)
-        #! ¡does not exist! 
-        except:
-            return Response({'Message': 'We couldn´t ubicate this item'})
-    
-    def create(self, request):
-        # pull data
-        data = request.data
-        # create instance (course)
-        new_course = Course.objects.create(title=data['title'], qualification=data['qualification'],img=data['img'], modules=data['modules'], teacher=data['teacher'], description=data['description'], price=data['price'])
-        # save new instance
-        new_course.save()
-        # serialize data
-        serializer = CourseSerializer(new_course)
-        return Response(serializer.data)
-    
-    def destroy(self):
-        #? ¿well done?
-        try:
-            # get id
-            id = self.kwargs["pk"]
-            # get instance
-            commit = get_object_or_404(Course, id=id)
-            # delete instance
-            commit.delete()
-            return Response({'Message': 'Object deleted successfully'})
-        except:
-            return Response({'Message':'we couldn´t get the item indicated'})
-    
-    def update(self, request):
-        # try to extract instance or an 404 error
-        course = get_object_or_404(Course, id=self.kwargs["pk"])
-        # serialize data
-        course_serializer = CourseSerializer(course, data=request.data)
-        #? ¿valid data?
-        if course_serializer.is_valid():
-            # save new data
-            course_serializer.save()
-            return Response(course_serializer.data)
-        return Response({'Message': 'Failed request'})
-    
-    def partial_update(self, request):
-        # try to pull instance or an 404 error
-        course = get_object_or_404(Course, id=self.kwargs["pk"])
-        # serialize data
-        serializer = CourseSerializer(course, data=request.data, partial=True)
-        #? ¿valida data?
-        if serializer.is_valid():
-            return Response(request.data)
-        return Response("wrong parameters")   
-
 def list(request):
     # get request data
     query = request.GET.get('q', None)
@@ -242,10 +178,7 @@ def list(request):
         queryset = queryset.filter(
             Q(title__icontains=query) |
             Q(price__icontains=query) |
-            Q(description__icontains=query) |
-            Q(qualification__icontains=query) |
-            Q(date__icontains=query) |
-            Q(teacher__icontains=query)
+            Q(qualification__icontains=query) 
         )
     # build context
     context = {
@@ -262,7 +195,7 @@ def form(request):
         instance = form.save(commit=False)
         instance.save()
         # redirect to new course instance
-        return HttpResponseRedirect(f'/Detail/{instance.id}')
+        return HttpResponseRedirect(f'/detail/{instance.id}')
     # build context
     context = {
         'form': form
@@ -289,7 +222,7 @@ def update(request,id_course):
         instance = form.save(commit=False)
         instance.save()
         # redirect to new changes
-        return HttpResponseRedirect(f'/Detail/{instance.id}')
+        return HttpResponseRedirect(f'/detail/{instance.id}')
     # build context
     context = {
         'form': form,
@@ -305,7 +238,7 @@ def delete(request, id_course):
         # delete course
         instance.delete()
         # redirect to main page
-        return HttpResponseRedirect('/Courses/')
+        return HttpResponseRedirect('/courses/')
     # build context
     context = {
         'course': instance 
@@ -328,7 +261,7 @@ class DeleteCourse(DeleteView):
     
     # succesfull operation
     def get_success_url(self):
-        return '/allCourses/'
+        return '/all-courses/'
 
 class CoursesView(TitleMixin, ListView):
     # define mode
@@ -348,7 +281,7 @@ class CreateView(CreateView, LinkMixin, StyleMix, ListView):
     # define class template
     template_name = 'pages/Form.html'
     # get link
-    link = '/allCourses/'
+    link = '/all-courses/'
     # define stylesheet
     stylesheet = 'Form2.css'
     
@@ -359,7 +292,7 @@ class CreateView(CreateView, LinkMixin, StyleMix, ListView):
     #? ¿valid data?
     def form_valid(self, form):
         super().form_valid(form)
-        return HttpResponseRedirect('/allCourses/')
+        return HttpResponseRedirect('/all-courses/')
     
     #! ¡something went wrong! 
     def form_invalid(self,form):
@@ -392,4 +325,4 @@ class UpdateView(UpdateView):
     #? ¿valid data?
     def get_success_url(self):
         self.object.get_edit_url()
-        return '/allCourses/'
+        return '/all-courses/'

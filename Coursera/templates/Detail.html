@@ -19,7 +19,7 @@
     {% block header %}
         <header>
         {% comment %} link to createa new course/instance {% endcomment %}
-            <a href='/Form/'>Create a new Course</a>
+            <a href='/form/'>Create a new Course</a>
         </header>
     {% endblock header %}
     {% block main %}
@@ -46,11 +46,11 @@
     {% block footer %}
         <footer>
             {% comment %} link to update {% endcomment %}
-            <a href='/Update/{{course.id}}'>Update this course!!!</a>
+            <a href='/update/{{course.id}}'>Update this course!!!</a>
             {% comment %} link to delete {% endcomment %}
-            <a href='/Delete/{{course.id}}'>Wanna delete this course???</a>
+            <a href='/delete/{{course.id}}'>Wanna delete this course???</a>
             {% comment %} link to courses template {% endcomment %}
-            <a href='/Courses/'>🏟️ Courses</a>
+            <a href='/courses/'>🏟️ Courses</a>
         </footer>
     {% endblock footer %}
 </body>
