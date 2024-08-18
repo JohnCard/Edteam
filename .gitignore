@@ -1,6 +1,8 @@
 # Databases
-/__pycache__/
-staticfiles/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
 
 # environmental
 .env
