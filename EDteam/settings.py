@@ -21,7 +21,11 @@ from dotenv import load_dotenv
 load_dotenv()
 
 # Pulling environment variables
-# PASSWORD = os.getenv('PASSWORD')
+DATABASE = os.getenv('DATABASE')
+USER = os.getenv('USER')
+PASSWORD = os.getenv('PASSWORD')
+HOST = os.getenv('HOST')
+PORT = int(os.getenv('PORT'))
 
 KEY = 'django-insecure-7!_n@-y*&c&3!qefly8w=zyyzd4=20z7_cbfkyey$d7i+)m$##'
 
@@ -88,11 +92,11 @@ WSGI_APPLICATION = 'EDteam.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'defaultdb',
-        'USER': 'avnadmin',
-        'PASSWORD': 'AVNS_B1fNkGcn4oew5zgDxh2',
-        'HOST': 'mysql-first-johncard962-9327.h.aivencloud.com',
-        'PORT': 11207
+        'NAME': DATABASE,
+        'USER': USER,
+        'PASSWORD': PASSWORD,
+        'HOST': HOST,
+        'PORT': PORT
     }
 }
 
