@@ -1,11 +1,7 @@
 # Databases
 /__pycache__/
 staticfiles/
-
-/Coursera/migrations
-/YouTube/migrations 
+**/migrations/
 
 # environmental
 .env
-./Coursera/migrations
-/__migrations__/
