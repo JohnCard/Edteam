@@ -1,5 +1,4 @@
 # Databases
-db.sqlite3
 /__pycache__/
 staticfiles/
 
@@ -8,3 +7,5 @@ staticfiles/
 
 # environmental
 .env
+./Coursera/migrations
+/__migrations__/
