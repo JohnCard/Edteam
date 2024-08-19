@@ -11,7 +11,7 @@ function Courses() {
       // pull all courses data from api
       const res = await getAllCourses();
       // set data for courses array
-      setCourses(res.data);
+      setCourses(res.data.results);
     }
     loadCourses();
   }, []);
@@ -25,8 +25,9 @@ function Courses() {
     <ul>
       {/* we start mapping all components */}
       {courses.map(({id, title, description, qualification, modules, price, teacher, img}) => (
-        <li key={id}>
+        <li key={title}>
           <Course 
+          key={id}
           // id component
           id={id}
           // component title

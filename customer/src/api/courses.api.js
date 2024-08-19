@@ -4,7 +4,7 @@ import axios from "axios";
 const URL = import.meta.env.VITE_BACKEND_URL
 // define base url
 const coursesApi = axios.create({
-  baseURL: `${URL}/course/`,
+  baseURL: `${URL}/course-view/`,
 })
 // define teachers api url
 const teachersApi = axios.create({
@@ -19,6 +19,6 @@ export const getCourse = (id) => coursesApi.get(`/${id}`);
 // create course function
 export const createCourse = (course) => coursesApi.post("/", course);
 // update course function
-export const updateCourse = (id, course) => coursesApi.put(`/${id}/`, course);
+export const updateCourse = (id, course) => coursesApi.put(`/${id}`, course);
 // delete course function
-export const deleteCourse = (id) => coursesApi.delete(`/${id}/`);
+export const deleteCourse = (id) => coursesApi.delete(`/${id}`);

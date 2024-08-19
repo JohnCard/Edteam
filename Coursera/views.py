@@ -4,18 +4,54 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from django.db.models import Q
 from django.http.response import JsonResponse
 from django.views import View
-from rest_framework import viewsets, status, generics
+from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import viewsets, status, generics, filters
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
+from rest_framework.generics import ListCreateAPIView, RetrieveUpdateDestroyAPIView
 import json
 from .forms import CourseForm, formCourse
 from .models import Course, Teacher
 from .mixins import TitleMixin, LinkMixin, StyleMix
 from .serializers import CourseSerializer, TeacherSerializerSec
-from .pagination import CourseCPagination
+from .pagination import CoursePagination
 
 # Create your views here.
+
+class CourseAPIView(ListCreateAPIView):
+    # Define serializer class
+    serializer_class = CourseSerializer
+
+    # Pagination class
+    pagination_class = CoursePagination
+
+    # Filters
+    filter_backends = [DjangoFilterBackend,
+                       filters.SearchFilter, filters.OrderingFilter]
+
+    filterset_fields = ['id', 'title', 'price', 'modules', 'teacher']
+
+    search_fields = ['id']
+
+    ordering_fields = ['id', 'title']
+
+    # Save bias
+    def perform_create(self, serializer):
+        return serializer.save()
+
+    # Retrieve all orders
+    def get_queryset(self):
+        return Course.objects.filter()
+
+class CourseRetrieveUpdateDestroyAPIView(RetrieveUpdateDestroyAPIView):
+    serializer_class = CourseSerializer
+
+    # Define look up field
+    lookup_field = "id"
+
+    def get_queryset(self):
+        return Course.objects.filter(id=self.kwargs['id'])
 
 class TeacherView(viewsets.ModelViewSet):
     # queryset
@@ -35,13 +71,14 @@ class PaginationView(generics.ListAPIView):
     # serializer class
     serializer_class = CourseSerializer
     # pagination class
-    pagination_class = CourseCPagination
+    pagination_class = CoursePagination
     # permission classes
     permission_classes = [
         IsAuthenticated
     ]
 
 class CourseView(View):
+    
     def get(self, id=0):
         #? ¿got an id?, we retrieve an specific course by it´s pk
         if (id > 0):
@@ -117,11 +154,12 @@ class CourseNewApi(APIView):
             # serialize data
             serializer = CourseSerializer(course)
             return Response(serializer.data)
-        # get all courses
-        courses = Course.objects.all()
-        # serialize data
-        serializer = CourseSerializer(courses, many=True)
-        return Response(serializer.data)
+        else:
+            # get all courses
+            courses = Course.objects.all()
+            # serialize data
+            serializer = CourseSerializer(courses, many=True)
+            return Response(serializer.data)
 
     def post(self, request):
         # serialize data

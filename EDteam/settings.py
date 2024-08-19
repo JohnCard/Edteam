@@ -26,13 +26,10 @@ USER = os.getenv('USER')
 PASSWORD = os.getenv('PASSWORD')
 HOST = os.getenv('HOST')
 PORT = int(os.getenv('PORT'))
-KEY = os.getenv('KEY')
+SECRET_KEY = os.getenv('KEY')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -155,7 +152,7 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
-    "ROTATE_REFRESH_TOKENS":True
+    "ROTATE_REFRESH_TOKENS": True
 }
 
 CORS_ORIGIN_WHITELIST = ['http://localhost:5173']
