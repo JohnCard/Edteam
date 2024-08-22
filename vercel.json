@@ -10,6 +10,13 @@
         "src": "customer/package.json",  
         "use": "@vercel/static-build",  
         "config": { "distDir": "build" }  
+      },
+      {
+        "src": "vite.config.js",
+        "use": "@vercel/static-build",
+        "config": {
+          "distDir": "dist"
+        }
       }
     ],
     "routes": [
