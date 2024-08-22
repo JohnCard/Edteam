@@ -1,48 +1,39 @@
 {
-    "version": 2,  
-    "builds": [
-      {
-        "src": "manage.py",  
-        "use": "@vercel/python",  
-        "config": { "maxLambdaSize": "50mb" }  
-      },
-      {
-        "src": "customer/package.json",  
-        "use": "@vercel/static-build",  
-        "config": { "distDir": "build" }  
-      },
-      {
-        "src": "vite.config.js",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "dist"
-        }
-      }
-    ],
-  "outputDirectory": "dist",
-    "routes": [
-      {
-        "src": "/static/(.*)",  
-        "dest": "/static/$1"  
-      },
-      {
-        "src": "/media/(.*)",  
-        "dest": "/media/$1"  
-      },
-      {
-        "src": "/(.*)",  
-        "dest": "manage.py"  
-      }
-    ],
-    "env": {
-      "DJANGO_SETTINGS_MODULE": "EDteam.settings",  
-      "PYTHONUNBUFFERED": "1"  
+  "version": 2,
+  "builds": [
+    {
+      "src": "manage.py",
+      "use": "@vercel/python",
+      "config": { "maxLambdaSize": "50mb" }
     },
-    "build": {
-      "env": {
-      "DATABASE_URL": "mysql-first-johncard962-9327.h.aivencloud.com",  
+    {
+      "src": "customer/package.json",
+      "use": "@vercel/static-build",
+      "config": { "distDir": "dist" }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/static/(.*)",
+      "dest": "/static/$1"
+    },
+    {
+      "src": "/media/(.*)",
+      "dest": "/media/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "manage.py"
+    }
+  ],
+  "env": {
+    "DJANGO_SETTINGS_MODULE": "EDteam.settings",
+    "PYTHONUNBUFFERED": "1"
+  },
+  "build": {
+    "env": {
+      "DATABASE_URL": "mysql-first-johncard962-9327.h.aivencloud.com",
       "SECRET_KEY": "django-insecure-7!_n@-y*&c&3!qefly8w=zyyzd4=20z7_cbfkyey$d7i+)m$##"
     }
-    }
   }
-  
+}
