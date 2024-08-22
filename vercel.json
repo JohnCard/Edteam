@@ -1,30 +1,12 @@
 {
   "version": 2,
   "builds": [
-    {
-      "src": "manage.py",
-      "use": "@vercel/python",
-      "config": { "maxLambdaSize": "50mb" }
-    },
-    {
-      "src": "customer/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "dist" }
-    }
+    { "src": "customer/package.json", "use": "@vercel/static-build" },
+    { "src": "./manage.py", "use": "@vercel/python" }
   ],
   "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "/static/$1"
-    },
-    {
-      "src": "/media/(.*)",
-      "dest": "/media/$1"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "manage.py"
-    }
+    { "src": "/static/(.*)", "dest": "customer/static/$1" },
+    { "src": "/api/(.*)", "dest": "./$1" }
   ],
   "env": {
     "DJANGO_SETTINGS_MODULE": "EDteam.settings",
@@ -33,7 +15,8 @@
   "build": {
     "env": {
       "DATABASE_URL": "mysql-first-johncard962-9327.h.aivencloud.com",
-      "SECRET_KEY": "django-insecure-7!_n@-y*&c&3!qefly8w=zyyzd4=20z7_cbfkyey$d7i+)m$##"
+      "SECRET_KEY": "django-insecure-7!_n@-y*&c&3!qefly8w=zyyzd4=20z7_cbfkyey$d7i+)m$##",
+      "DEBUG": "true"
     }
   }
 }
